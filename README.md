@@ -1,35 +1,34 @@
 # doctors_appointment_system
 Using django
 
-It is a simple doctor's appointment system project . This project is made using Django as a backend language. 
-There are some modules used in this project , so we new to install those while use this project in a new machine to run the project properly.
+This is a doctor's appointment system project created using Django as the backend language. To properly run the project on a new machine, we need to install some modules and/or packages.
 
-In the fiirst i'm asumeing that the PC have Python installed in it. If not please install it first.
+Assuming that Python is already installed on the machine. If not please install it first.
 
-After having Python installed , visit the location where the 'manage.py' file located. Open the terminal ( windows default terminal or any other terminal ) on that location and run the following commands :-
-( the terminal location have to be something like this : ``` C:\Users\..\doctorAppointment> ``` )
-1) run the command ``` pip install -r requirements.txt ```
-      This command will download all the modules / packages that are required.
-    
-2) run ``` python manage.py runserver ```
+Now navigate to the directory where the 'manage.py' file is located. Open the terminal (Windows default terminal or any other terminal) at that location and run the following commands: (The terminal location should look something like this: ``` C:\Users..\doctorAppointment> ``` )
 
-3) visit ' 127.0.0.1:8000 ' in your browser 
+1) Run the command ``` pip install -r requirements.txt ``` . This command will download all the required modules/packages.
 
-by default use the followinf credentials to login as clinic on the page ' /clinic/login/ ' 
-Email:- ab@ab.com
-Passwrod:- 123123
+2) Run ``` python manage.py runserver ```.
+
+3) Now visit " 127.0.0.1:8000 " in your browser.
+
+By default, use the following credentials to log in as a clinic on the page "/clinic/login/":
+Email: ab@ab.com
+Password: 123123
 
 
 
 
+Note: If an error occurs while running ``` python manage.py runserver ```, try the following steps:
 
-Note : - If any error occered while running ' python manage.py runserver ' , then try the following steps:-
+1) Run ``` python manage.py makemigrations ```.
 
-1) run ``` python manage.py makemigrations ```
-2) run ``` python manage.py migrate ```
-3) run ``` python manage.py createsuperuser ```
-      after running the 3rd one provide any email and password and remember it as it is required to login as ADMIN in the future future .
-4) run ```python manage.py runserver ```
+2) Run ``` python manage.py migrate ```.
 
+3) Run ``` python manage.py createsuperuser ```. 
+      After running the third command, provide any email and password and remember it, as it will be required to log in as ADMIN in the future.
 
-In case the error was not resolved , please contact us 
+4) Run  ``` python manage.py runserver ```.
+
+If the error still not resolved , please contact us.
