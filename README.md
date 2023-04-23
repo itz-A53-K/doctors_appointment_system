@@ -7,7 +7,7 @@ Assuming that Python is already installed on the machine. If not please install 
 
 Now navigate to the directory where the 'manage.py' file is located. Open the terminal (Windows default terminal or any other terminal) at that location and run the following commands: (The terminal location should look something like this: ``` C:\Users..\doctorAppointment> ``` )
 
-1) Run the command ``` pip install -r requirements.txt ``` . This command will download all the required modules/packages.
+1) Run the command ``` pip install -r requirement.txt ``` . This command will download all the required modules/packages.
 
 2) Run ``` python manage.py runserver ```.
 
