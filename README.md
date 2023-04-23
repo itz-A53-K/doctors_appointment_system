@@ -15,9 +15,9 @@ After having Python installed , visit the location where the 'manage.py' file lo
 
 3) visit ' 127.0.0.1:8000 ' in your browser 
 
-by default use the followinf credentials to login as clinic on the page ' /clinic/login/ ' 
-Email:- ab@ab.com
-Passwod:- 123123
+by default use the followinf credentials to login as clinic on the page ' /clinic/login/ ' \n
+Email:- ab@ab.com\n
+Passwrod:- 123123\n
 
 
 
