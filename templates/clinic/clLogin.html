@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteName: Admin Login Page</title>
+
+    <link rel="stylesheet" href="{% static 'patient/css/utils.css' %}">
+    <link rel="stylesheet" id="theme" href="">
+    <style>
+        a {
+            color: rgb(134, 84, 250);
+            font-size: 1.2rem;
+            font-weight:600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+        }
+
+        #clLogin {
+            width: 25rem;
+            /* background-color: #222222; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:center;
+            border-radius: 5px;
+            padding: 1.5rem ;
+            margin: auto;
+            background-color: rgba(194, 194, 175, 0.103);
+            box-shadow: 0 4px 15px 3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+        
+        }
+        #clLogin h2{
+            font-size: 1.5rem;
+            margin-bottom: 1rem; 
+            text-align:center;       
+        }
+
+        .frm-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: .35rem;
+            width: 23rem;
+        }
+
+        .frm-item input {
+            width: -webkit-fill-available;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid rgb(138, 36, 206);
+            border-radius: 5px;
+            outline: none;
+            font-size: 1.2rem;
+            background: none;
+            color: #6c4ced;
+            margin: .3rem 0;
+            caret-color: rgb(246, 9, 135)/* blinking cursor color */
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* border-bottom: 1px solid rgba(240, 233, 220, 0.827); */
+            box-shadow: 0px 4px 5px -3px rgba(152, 148, 139, 0.827);
+            margin-bottom: .2rem;
+            padding: .3rem 5rem;
+        }
+
+        .navContL {
+            display: flex;
+            align-items: center;
+
+        }
+        
+        .captchaBox{
+            flex-direction:row;
+            justify-content: space-between;
+            align-items:center;
+        }
+        .captchaBox #refCapt{
+            font-size:1.6rem;
+            font-weight:800;
+            cursor:pointer;
+        }
+         .captchaDiv {
+            user-select: none;
+            height: 40px; 
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgb(138, 36, 206);
+          }
+        
+        .captchaCode {
+            text-align: center; 
+            font-size: 20px; 
+            color: white;
+            user-select: none; 
+            font-weight: bolder; 
+            letter-spacing: 10px;
+        }
+                
+        #loading-screen {
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1d2328f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            border: 8px solid #eee;
+            border-top: 8px solid #007bff;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .text {
+            font-size: 24px;
+            color: #007bff;
+            margin-top: 24px;
+            text-align: center;
+            animation: fadeInOut 1.2s ease-in-out infinite;
+        }
+        @media screen and (max-width: 480px) {
+            .navbar{
+                flex-direction:column;
+            }
+            #clLogin{
+                width:100%;
+                padding: 1.5rem ;
+                margin: 0;
+            }
+            #clLogin .frm-item{
+                width:100%;
+                {% comment %} padding: 1.5rem 0;
+                margin: 0; {% endcomment %}
+            }
+            .body-container{
+                margin: 0 4rem;
+            }
+        }
+        @media screen and (max-width: 340px) {
+            .body-container{
+                margin: 2rem;
+            }
+            .siteLogo img{
+                width: 8rem;
+            }
+        }
+        
+
+    </style>
+
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <div class="text">Loading...</div>
+    </div>
+    <nav>
+        <div class="navbar">
+            <div class="navContL">
+                <div class="siteLogo">
+                    <img src="https://www.w3schools.com/how-spaces-works3.png" alt="SiteName" srcset="" width=""
+                        height="50">
+                </div>
+                <div class="siteName">
+                    SiteName
+                </div>
+            </div>
+            <div class="navContR">
+                 <a href="/">&#127968; Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="body-container">
+        {% for message in messages %}
+            <div class="alert">
+                <div class=" alert-{{message.tags}}" role="alert">
+                    {{ message}}
+                </div>
+            </div>
+        {% endfor %}
+        <form id="clLogin" method="post" action="/clinic/login/">
+            <h2>Enter login information</h2>
+            <span class="err"></span>
+            {% csrf_token %}
+            <div class="frm-item">
+                <input type="email" placeholder="Email" id="clEmail" name="clEmail" required>
+            </div>
+            <div class="frm-item">
+                <input type="password" placeholder="Password" id="clPass" name="clPass" required>
+            </div>
+            <div class="frm-item captchaBox">
+                <div class="captchaDiv">
+                    <span id="clCaptcha" class="captchaCode" style="width: 100%;"></span>
+                </div>
+                <span id="refCapt">⟳</span>
+            </div>
+            <div class="frm-item">
+                <input type="text" maxlength="5" placeholder="Enter Captcha code" id="inp-captcha" required>
+            </div>
+            <div class="frm-btns">
+                <button class="btn bg-bv" type="submit" id="log-submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="{% static 'clinic/js/clLogin.js' %}"></script>
+
+    <script>
+        const themeLink = $('#theme');
+        const savedTheme = localStorage.getItem('darkMode');
+        if (savedTheme) {
+            if (savedTheme == 'true') {
+                themeLink.attr("href","{% static 'patient/css/dark.css' %}")
+                $("body").addClass("dark")
+            }
+            else {
+                themeLink.attr("href", "")
+                $("body").removeClass("dark")
+            }
+        }
+
+        window.addEventListener("load", function() {
+            this.setTimeout(function(){
+        
+                document.getElementById("loading-screen").style.display = "none";
+            }, 500)
+        });
+        
+        setTimeout(() => {
+            $('.alert').html("")
+        }, 6000);
+        
+    </script>
+</body>
+
+</html>

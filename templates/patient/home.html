@@ -1,0 +1,59 @@
+{% extends 'patient/base.html' %}
+{% load static %}
+{% block title %}SiteName: Your One-Step Solution for Hassle-Free Doctor Appointment{% endblock title %}
+
+{% block cssLink %}
+<link rel="stylesheet" href="{% static 'patient/css/homePage.css' %}">
+    
+{% endblock cssLink %}
+{% block body %}
+<section class="bodySec">
+    <div class="hero">
+      <h1>Welcome to Our Appointment System</h1>
+      <p>Book an appointment with one of our qualified doctors today. We make booking appointments with doctors easy and convenient. </p>
+      <a href="/bookAppointment/" class="cta">Book an Appointment</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+      <h3>Easy Booking</h3>
+      <p>Our appointment booking system is simple and user-friendly, making it easy for patients to book appointments with doctors.</p>
+    </div>
+    <div class="feature">
+      <h3>24/7 Availability</h3>
+      <p>Our system is available 24/7, so patients can book appointments with doctors at any time, day or night.</p>
+    </div>
+    <div class="feature">
+      <h3>Caring Qualified Doctors</h3>
+      <p>Our doctors are caring, qualified and highly trained in their respective fields, and they will provide the best possible care for patients. </p>
+    </div>
+</section>
+
+<section class="about-us" id="about-us">
+    <h2>About Us</h2>
+    <p>We are a team of experienced healthcare professionals dedicated to providing the best possible care for our patients. Our appointment system is designed to make booking appointments with doctors easy and convenient.</p>
+</section>
+<section class="contact-us" id="contact-us">
+    <h2>Contact Us</h2>
+    
+    <div class="card">
+      <h3>Phone</h3>
+      <p><span class="symbol">&#128222;</span> +91 1231231230</p>
+      <p><span class="symbol">🕿</span> 000-000000000</p>
+    </div>
+    <div class="card">
+      <h3>Email</h3>
+      <p><span class="symbol">&#9993;</span> appointmentBookingSystem@appointmentBookingSystem.com</p>
+    </div>
+    <div class="card">
+      <h3>Address</h3>
+      <p><span class="symbol">🏠</span> address,district,nearby,state,pin</p>
+    </div>
+</section>
+
+<footer>
+    <p>Copyright © 2023 Doctor's Appointment System</p>
+</footer>
+
+{% endblock body %}

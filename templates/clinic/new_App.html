@@ -1,0 +1,89 @@
+{% extends 'clinic/clBase.html' %}
+{% load static %}
+{% block cssLink %}
+<link rel="stylesheet" href="{% static 'patient/css/loginPage.css' %}">
+{% endblock cssLink %}
+
+{% block css %}
+.formsContainer{
+    padding: 2rem;
+}
+.frm-item{
+    width:27rem;
+    flex-direction:column;
+    margin: .4rem 1.2rem;
+    align-items:start;
+}
+#bookHeading{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem ;
+}
+{% endblock css %}
+{% block body %}
+
+    {% csrf_token %}
+    <div class="formsContainer">
+        <form id="booking-form" method="post" action="/patient/bookAppointment/">
+            <h2 id="bookHeading">Book an appointment</h2>
+            <span class="err"></span>
+           
+            <div class="frm-item">
+                <label for="pName">Full name</label>
+                <input type="text" name="pName" id="pName" placeholder="Full name" required>
+            </div> 
+            <div class="frm-item">
+                <label for="pAge">Age</label>
+                <input type="age" name="pAge" id="pAge" placeholder="Age"  required>
+            </div> 
+            <div class="frm-item">
+                <label for="pEmail">Email address</label>
+                <input type="email" name="pEmail" id="pEmail" placeholder="Email address"  required>
+            </div> 
+            <div class="frm-item">
+                <label for="pPhone">Phone number (optional)</label>
+                <input type="number" name="pPhone" id="pPhone" placeholder="Phone number (optional)" value="">
+            </div>
+            <div class="frm-item">
+                <label for="pAddress">Address</label>
+                <input type="text" name="pAddress" id="pAddress" placeholder="Address" value="">
+            </div>
+            <div class="frm-item">
+                <label for="date">Appointment date</label>
+                <input type="date" name="appointDate" id="appointDate" placeholder="Select date" required>
+            </div> 
+            <div class="frm-item">
+                <label for="category">Doctor Category</label>
+                {% comment %} <input list="category" id="inpCategory" onChange="myFunction()" placeholder="Select/search doctor category" id="">
+                <datalist id="category">
+                    {% for i in doctor_category %}
+                    <option value="{{i.category}} {% if i.category_desc %}( {{i.category_desc}} ){% endif %}" ></option>
+                    {% endfor %}
+                </datalist> {% endcomment %}
+                <select id="category" name="category" >
+                    
+                    <option value="">--- Select Doctor Category ---</option>
+                    {% for i in doctor_category %}
+                    <option value="{{i.category_id}}">{{i.category}} {% if i.category_desc %}( {{i.category_desc}} ){% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div> 
+            <div class="frm-item">
+                <label for="doctor">Doctor</label>
+                <select id="doctor" name="doctor" disabled>
+                    <option value="">--- Select Doctor ---</option>
+                    
+                </select>
+            </div> 
+        </form>
+        <div class="frm-btns">
+            <button class="btn bg-bv" type="submit" id="book-submit" disabled>Book Now</button>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block JSLink %}
+<script src="{% static 'patient/js/bookingPage.js'%}"></script>
+{% endblock JSLink %}
+

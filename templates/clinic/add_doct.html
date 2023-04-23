@@ -1,0 +1,101 @@
+{% extends 'clinic/clBase.html' %}
+{% load static %}
+
+{% block cssLink %}
+<link rel="stylesheet" href="{% static 'patient/css/loginPage.css' %}">
+{% endblock cssLink %}
+
+{% block css %}
+.formsContainer{
+    padding: 2rem;
+}
+.frm-item{
+    width:27rem;
+    flex-direction:column;
+    margin: .4rem 1.2rem;
+    align-items:start;
+}
+#bookHeading{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem ;
+}
+.checkboxes{
+    display:flex;
+    width:100%;
+
+}
+.checkboxes{
+    display:flex;
+    flex-wrap:wrap;
+    user-select:none;
+}
+.checkbox{
+    display:flex;
+    margin:.5rem .8rem;
+    cursor:pointer;
+}
+.checkbox input, .checkbox label{
+    cursor:pointer;
+}
+
+#id_available_day{
+    height:13rem;
+    background-color: rgba(255,255,255,1);
+}
+
+#id_available_day option{
+    padding: .2rem 0.5rem ;
+    margin: 0.2rem 0;
+}
+#id_available_day option:hover{
+    color : white;
+    background-color: #1e88ed;
+
+}
+{% endblock css %}
+
+{% block body %}
+{% csrf_token %}
+<div class="formsContainer">
+    <form id="addDoct_form" method="post" action="/clinic/add_doct/">
+        <h2 id="bookHeading">Add New Doctor</h2>
+        <span class="err"></span>
+       
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            <div class="frm-item">
+                {{ field.label_tag }} {{ field }}
+            </div> 
+        </div>
+        {% endfor %}
+        <div class="frm-item">
+            <label for="category">Doctor Category</label>
+            <select id="category" name="category" >
+                
+                <option value="">--- Select Doctor Category ---</option>
+                {% for i in doctor_category %}
+                <option value="{{i.category_id}}">{{i.category}} {% if i.category_desc %}( {{i.category_desc}} ){% endif %}</option>
+                {% endfor %}
+            </select>
+        </div> 
+
+        <button class="btn bg-bv" type="submit" id="add_doct">Add Doctor</button>
+        
+    </form>
+
+{% endblock body %}
+
+{% block JS %}
+<script>
+    $("#id_Phone").keypress(function(e){
+        if($(this).val().length >9){
+            e.preventDefault();
+        }
+    })
+
+</script>
+{% endblock JS %}

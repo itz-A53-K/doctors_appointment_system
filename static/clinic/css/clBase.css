@@ -1,0 +1,145 @@
+
+.main-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+
+    height: relative;
+    background-color: rgba(0, 0, 0, .847);
+    width: fit-content;
+    min-width: 15%;
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+.navbar .navCont1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+.navbar .navCont2 {
+    margin:  2rem 0;
+}
+
+.navbar ul {
+    list-style: none;
+}
+
+.navbar ul li {
+    margin: 1.5rem ;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+   
+}
+
+.navbar ul .nav-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: .3s ease-in-out;
+}
+.navbar ul .nav-link:hover {
+    color: rgb(220, 132, 49);
+}
+
+
+.toggle-button {
+    cursor: pointer;
+    padding: 1rem;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin: 1rem;
+    background-color: #000000;
+    height: fit-content;
+    z-index: 99999;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.change .bar {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.change .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.change .bar:last-child {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+
+.body-container{
+    min-height: 96vh;
+    padding: 4vh;
+    width: 78%;
+    justify-content: flex-start;
+}
+.body-container h1{
+    font-size: 2rem;
+    margin: 3rem 0 5rem 0;
+    text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+    .navbar{
+        position: absolute;
+        background-color: #000000;
+        z-index: 9999;
+        height: 100%;
+    }
+    .body-container{
+        width: 100%;
+        margin-top: 3rem;
+        padding: 0rem;
+    }
+
+}
+@media screen and (max-width: 550px) {
+    
+    .body-container{
+        width: 90%;
+        padding: 1rem;
+    }
+    .body-container .formsContainer{
+        width: 100%;
+        padding: 1rem;
+        margin: 5rem 0;
+    }
+    .formsContainer form{
+        margin: 0;
+        width: 100%;
+    }
+    .formsContainer form .frm-item, form .fieldWrapper{
+        width: 100%;
+        margin: 0.4rem 0;
+    }
+
+}
+@media screen and (max-width: 340px){
+    .body-container {
+        margin: 3rem 0rem !important;
+    }
+}

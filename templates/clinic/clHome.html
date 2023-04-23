@@ -1,0 +1,49 @@
+{% extends 'clinic/clBase.html' %}
+{% load static %}
+{% block body %}
+<h1>List of Appointments {% if date %}( {%now "d-m-Y"%} ){% endif %} </h1>
+<div class="tableContainer">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <td class="sNo">#</td>
+                <td>Name</td>
+                <td class="age">Age</td>
+                <td>Address</td>
+                <td>Specialization</td>
+                <td>Doctor Name</td>
+                <td>Appointment Time</td>
+                <td>Appointment Date</td>
+                <td>Booked on</td>
+                {% comment %} <td class="action">Action</td> {% endcomment %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in appointments %}
+            <tr>
+                <td class="sNo">{{forloop.counter}}</td>
+                <td>{{item.patient_name | title}}</td>
+                <td class="age">{{item.patient_age}}</td>
+                <td>{{item.address | title}}</td>
+                <td>{{item.doctor.category | title}}</td>
+                <td>{{item.doctor | title}}</td>
+                <td>{{item.appointment_time}} (Approx.)</td>
+                <td>{{item.appointment_date|date:'d F, Y'}}</td>
+                <td>{{item.bookTime|date:'d F, Y h:i A'}}</td>
+                {% comment %}<td class="action">
+                    <button class="btn btn-dlt" id="{{item.id}}">&#128465;</button> 
+                </td>{% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}
+
+{% block JSLink %}
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+{% endblock JSLink %}
+{% block JS %}
+<script>
+    let table = new DataTable('#myTable');
+</script>{% endblock JS %}

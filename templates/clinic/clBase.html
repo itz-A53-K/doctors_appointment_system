@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock title %}</title>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    
+	<link rel="stylesheet" type="text/css" href="{% static 'patient/css/utils.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'clinic/css/clBase.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'clinic/css/dataTables.css' %}">
+    <link rel="stylesheet" id="theme" href="">
+    
+    {% block cssLink %}{% endblock cssLink %}
+
+    <style>
+        {% block css %}{% endblock css %}
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <div class="text">Loading...</div>
+      </div>
+    <div class="main-container">
+        <a  class="toggle-button hidden" id="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar hidden">
+            <div class="navCont1">
+                <a href="/clinic/home/" class="logo"> Site Name</a>
+            </div>
+            <div class="navCont2">
+                <ul class="">
+                    <li class="nav-item">
+                        <a href="/clinic/home/" class="nav-link">Today's Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/clinic/new_App/" class="nav-link">New Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/clinic/allAppointment/" class="nav-link">All Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/clinic/doctors/" class="nav-link">Doctor's List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/clinic/add_doct/" class="nav-link">New Doctor</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn bg-bv" id="btnLO">Logout</button>
+                    </li>
+                    <li class="nav-item">
+                        <img src="{% static 'patient/img/contrast_white.svg' %}" id="chngTheme" alt="" srcset="" width="20" class="bg-bv btn">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="body-container">
+            {% for message in messages %}
+                <div class="alert">
+                    <div class=" alert-{{message.tags}}" role="alert">
+                        {{ message}}
+                    </div>
+                </div>
+            {% endfor %}
+            {% block body %}{% endblock body %}
+        </div>
+    </div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script src="{% static 'clinic/js/clBase.js' %}"></script>
+<script>
+    //setting Theme saved on local storage
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme) {
+        if (savedTheme == 'true') {
+            themeLink.attr("href", "/static/patient/css/dark.css")
+            $("body").addClass("dark")
+        }
+        else {
+            themeLink.attr("href", "")
+            $("body").removeClass("dark")
+        }
+    }
+</script>
+{% block JSLink %}{% endblock JSLink %}
+{% block JS %}{% endblock JS %}
+</body>
+</html>

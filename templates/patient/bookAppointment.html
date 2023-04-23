@@ -1,0 +1,119 @@
+{% extends 'patient/base.html' %}
+{% load static %}
+{% block cssLink %}
+    <link rel="stylesheet" href="{% static 'patient/css/loginPage.css' %}">
+{% endblock cssLink %}
+{% block css %}
+.formsContainer{
+    padding: 2rem;
+}
+.frm-item{
+    width:27rem;
+    flex-direction:column;
+    margin: .4rem 1.2rem;
+    align-items:start;
+}
+#bookHeading{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem ;
+}
+.respMsgContainer{
+    position: fixed;
+    top: 50%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 1px #6f6c6c;
+    border: 2px solid lightsteelblue;
+    padding: 1rem;
+    background: #dce7da;
+    color: black;
+    display:none;
+}
+@media screen and (max-width: 450px) {
+    .formsContainer{
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+    .formsContainer form{
+        margin: 0;
+        width: 100%;
+    }
+
+    .body-container{
+        margin: 1.5rem;
+    }
+    .forms form{
+        width: 100%;
+    }
+    form .frm-item{
+        width: 100%;
+    }
+}
+{% endblock css %}
+
+{% block body %}
+<div class="formsContainer">
+    {% csrf_token %}
+    <form id="booking-form" method="post" action="/bookAppointment/">
+            <h2 id="bookHeading">Book an appointment</h2>
+            <span class="err"></span>
+            <div class="frm-item">
+                <label for="pName">Full name</label>
+                <input type="text" name="pName" id="pName" placeholder="Full name" value="{{request.user.first_name | title}}" required>
+            </div> 
+            <div class="frm-item">
+                <label for="pAge">Age</label>
+                <input type="age" name="pAge" id="pAge" placeholder="Age" value="{{request.user.age}}" required>
+            </div> 
+            <div class="frm-item">
+                <label for="pEmail">Email address</label>
+                <input type="email" name="pEmail" id="pEmail" placeholder="Email address" value="{{request.user.email}}" disabled>
+            </div> 
+            <div class="frm-item">
+                <label for="pPhone">Phone number (optional)</label>
+                <input type="number" name="pPhone" id="pPhone" placeholder="Phone number (optional)" value="">
+            </div>
+            <div class="frm-item">
+                <label for="pAddress">Address</label>
+                <input type="text" name="pAddress" id="pAddress" placeholder="Address" value="">
+            </div>
+            <div class="frm-item">
+                <label for="date">Appointment date</label>
+                <input type="date" name="appointDate" id="appointDate" placeholder="Select date" required>
+            </div> 
+            <div class="frm-item">
+                <label for="category">Doctor Category</label>
+                {% comment %} <input list="category" id="inpCategory" onChange="myFunction()" placeholder="Select/search doctor category" id="">
+                <datalist id="category">
+                    {% for i in doctor_category %}
+                    <option value="{{i.category}} {% if i.category_desc %}( {{i.category_desc}} ){% endif %}" ></option>
+                    {% endfor %}
+                </datalist> {% endcomment %}
+                <select id="category" name="category" >
+                    
+                    <option value="">--- Select Doctor Category ---</option>
+                    {% for i in doctor_category %}
+                    <option value="{{i.category_id}}">{{i.category}} {% if i.category_desc %}( {{i.category_desc}} ){% endif %}</option>
+                    {% endfor %}
+                </select>
+            </div> 
+            <div class="frm-item">
+                <label for="doctor">Doctor</label>
+                <select id="doctor" name="doctor" disabled>
+                    <option value="">--- Select Doctor ---</option>
+                    
+                </select>
+            </div> 
+        </form>
+        <div class="frm-btns">
+            <button class="btn bg-bv" type="submit" id="book-submit" disabled>Book Now</button>
+        </div>
+</div>
+
+<div class="respMsgContainer">
+    
+</div>
+{% endblock body %}
+{% block JSLink %}
+    <script src="{% static 'patient/js/bookingPage.js'%}"></script>
+{% endblock JSLink %}

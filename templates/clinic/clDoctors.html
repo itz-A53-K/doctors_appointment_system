@@ -1,0 +1,68 @@
+{% extends 'clinic/clBase.html' %}
+{% load static %}
+
+{% block css %}
+table td:nth-child(5){
+    width:7rem !important;
+}
+table td:nth-child(7){
+    width:7.9rem !important;
+}
+
+{% endblock css %}
+
+
+{% block body %}
+<h1>List of Doctors </h1>
+<div class="tableContainer">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <td class="sNo">#</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Phone No</td>
+                <td>Degrees</td>
+                <td>Specialization</td>
+                <td>Available Days</td>
+                <td>Unavailable Today?</td>
+                <td class="action">Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doct in doctors %}
+            <tr>
+                <td class="sNo">{{forloop.counter}}</td>
+                <td>{{doct.doctor_name | title}}</td>
+                <td>{{doct.doctor_email}}</td>
+                <td>{{doct.phone_no | title}}</td>
+                <td>{{doct.degrees | title}}</td>
+                <td>{{doct.category | title}}</td>
+                <td>{{doct.available_day}}</td>
+                <td>{%if doct.unavailable_Today%}Yes &#9989;{% else %}No &#10060; {% endif %}</td>
+                <td class="action">
+                    <button class="btn btn-dlt" id="{{doct.id}}">&#128465;</button> 
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}
+
+{% block JSLink %}
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+{% endblock JSLink %}
+{% block JS %}
+<script>
+    let table = new DataTable('#myTable');
+
+    $(".btn-dlt").click(function(){
+        tds=$(this).parent().parent().children('td')
+
+        console.log($(this).attr("id"))
+        if(confirm("Do you really want to delete the Doctor Entry with the following details ?\n\n   Name:- "+ tds.eq(1).text()+"\n   Email:- "+ tds.eq(2).text()+"\n   Specialization:- "+ tds.eq(5).text() )){
+            window.location.href="/clinic/del_doct/?id="+$(this).attr("id")
+        }
+    })
+</script>{% endblock JS %}

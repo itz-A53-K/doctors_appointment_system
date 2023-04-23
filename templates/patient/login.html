@@ -1,0 +1,118 @@
+{% extends 'patient/base.html' %}
+
+{% load static %}
+{% block title %}SiteName: Login / Signup{% endblock title %}
+
+{% block cssLink %}
+    <link rel="stylesheet" href="{% static 'patient/css/loginPage.css' %}">
+{% endblock cssLink %}
+{% block body %}
+
+{% comment %} <div class="body-container"> {% endcomment %}
+    {% comment %} {% for message in messages %}
+        <div class="alert">
+            <div class=" alert-{{message.tags}}" role="alert">
+                {{ message}}
+            </div>
+        </div>
+    {% endfor %} {% endcomment %}
+
+    <div class="formsContainer">
+        
+        <div class="formsBar">
+            <ul>
+                <li class="list-item">
+                    <span class="log-frm-vis afterLine">Login</span>
+                </li>
+
+                <li class="list-item">
+                    <span  class="reg-frm-vis">Register</span>
+                </li>
+            </ul>
+        </div>
+        <div class="forms">
+            <div class="logFrm" id="logFrm">
+                <form id="login-form" method="post" action="/login/">
+                    <span class="err"></span>
+                    {% csrf_token %}
+                    <div class="frm-item">
+                        <input type="email" placeholder="Email" id="log-email" name="log-email">
+                    </div>
+                    <div class="frm-item">
+                        <input type="password" placeholder="Password" id="log-pass" name="log-pass">
+                        <span class="eyeBtn" id="eye1"></span>
+                    </div>
+                    <div class="captchaBox">
+                        <div class="captchaDiv">
+                            <span id="logCaptcha" class="captchaCode"></span>
+                        </div>
+                        <span class="refCapt">⟳</span>
+                        <input type="text" maxlength="5" placeholder="Enter Captcha code" id="log-inp-captcha">
+                    </div> 
+                </form>
+                <div class="frm-btns">
+                    {% comment %} <a href="" id="forgPass">Forgot Password?</a> {% endcomment %}
+                    <button class="btn bg-bv" type="submit" id="log-submit">Login</button>
+                    <span class="">Don't have account? <a class="reg-frm-vis">Register</a></span>
+                </div>
+            </div>
+            {% comment %} <input type="hidden" id="csrf"> {% endcomment %}
+            <div class="regFrm hidden" id="regFrm">
+                <form method= "post" action="/signup/" id="register-form">
+                    {% csrf_token %}
+                    <span class="err"></span>
+
+                    <div class="frm-item">
+                        <input type="text" maxlength="60" placeholder="Full Name" id="reg-name" name="reg-name">
+                    </div>
+                    <div class="frm-item">
+                        <input type="number" maxlength="3" placeholder="Age" id="reg-age" name="reg-age">
+                    </div>
+                    <div class="frm-item">
+                        <input type="number" placeholder="Phone number" id="reg-ph" name="reg-ph">
+                    </div>
+                    <div class="frm-item">
+                        <input type="email" placeholder="Email" id="reg-email" name="reg-email">
+                    </div>
+                    <div class="frm-item">
+                        <input type="password" placeholder="Password (Minimum 5 characters)" id="reg-pass" name="reg-pass">
+                        <span class="eyeBtn" id="eye2"></span>
+                    </div>
+                    <div class="frm-item">
+                        <input type="password" placeholder="Password (again)" id="reg-pass-conf" name="reg-pass-conf">
+                        <span class="eyeBtn" id="eye3"></span>
+                    </div>
+                    
+                    <div class="captchaBox">
+                        <div class="captchaDiv">
+                            <span id="regCaptcha" class="captchaCode"></span>
+                        </div>
+                        <span class="refCapt">⟳</span>
+                        <input type="text" maxlength="5" placeholder="Enter Captcha code" id="reg-inp-captcha">
+                    </div> 
+                </form>
+                <div class="frm-btns">
+                    <button class="btn bg-bv" type="submit" id="reg-submit">Register</button>
+                    <span class="">Already registered? <a class="log-frm-vis">Login</a></span>
+                </div>
+            </div>
+
+    </div>
+{% comment %} </div> {% endcomment %}
+
+{% endblock body %}
+
+{% block JSLink %}
+    
+<script src="{% static 'patient/js/loginPage.js' %}"></script>
+
+{% endblock JSLink %}
+{% block JS %}
+    
+<script>
+   
+</script>
+
+{% endblock JS %}
+
+

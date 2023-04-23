@@ -1,0 +1,38 @@
+.tableContainer{
+    padding:2rem 1rem;
+}
+#myTable_filter {
+    margin:.5rem 0 !important;
+}
+table thead{
+    background-color: rgb(77, 75, 75);
+    color: aliceblue;
+}
+table thead td{
+    width: fit-content !important;
+    line-break: normal;
+}
+table td{
+    text-align: center !important;
+    font-size: 1.15rem;
+    max-width:16rem !important;
+    line-break:anywhere;
+}
+.btn-dlt{
+    background-color: rgb(216, 36, 36);
+    transition: .2s ease;
+}
+.btn-dlt:hover{
+    background-color: rgb(240, 70, 70);
+}
+.dataTables_length select{
+    background-color: #fff !important ;
+}
+
+@media screen and (max-width: 950px) {
+    .tableContainer{
+        width: 95%;
+        overflow-x: scroll;
+        padding: 2rem 0;
+    }
+}
